@@ -1,0 +1,23 @@
+<ActionBar title="NS Realworld">
+    <FlexboxLayout justifyContent="space-between" alignItems="center">
+        <Label text="Conduit"
+               class="text-logo text-green"
+               [nsRouterLink]="['/']" pageTransition="fade"></Label>
+        <StackLayout orientation="horizontal" horizontalAlignment="right">
+            <Label text="Home" [nsRouterLink]="['/']" pageTransition="fade"></Label>
+            <ng-container *ngIf="!is_logged_in">
+                <Label text="Login" [nsRouterLink]="['/login']" pageTransition="fade"></Label>
+                <Label text="Register" [nsRouterLink]="['/register']" pageTransition="fade"></Label>
+            </ng-container>
+            <ng-container *ngIf="is_logged_in">
+                <Label text="New Article" [nsRouterLink]="['/editor']" pageTransition="fade"></Label>
+                <Label text="Settings" [nsRouterLink]="['/settings']" pageTransition="fade"></Label>
+                <StackLayout orientation="horizontal"
+                             [nsRouterLink]="['/profile', user.username]" pageTransition="fade">
+                    <Image [src]="user.image" class="user-pic"></Image>
+                    <Label [text]="user.username"></Label>
+                </StackLayout>
+            </ng-container>
+        </StackLayout>
+    </FlexboxLayout>
+</ActionBar>

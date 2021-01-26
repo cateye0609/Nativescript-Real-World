@@ -1,0 +1,52 @@
+<ns-action-bar></ns-action-bar>
+<StackLayout class="profile-page">
+    <StackLayout class="user-info">
+        <StackLayout>
+            <Image class="user-img" [src]="profile?.image" alt="avatar"
+                   onerror="this.src='~/assets/image/default-avatar.png'">
+            </Image>
+            <FlexboxLayout flexDirection="column" alignItems="center">
+                <Label [text]="profile?.username" textWrap="true" class="user-name"></Label>
+                <Label [text]="profile.bio" textWrap="true"></Label>
+            </FlexboxLayout>
+            <Button class="btn btn-outline-secondary fas"
+                    [text]="'&#xf067; ' + follow_text + ' ' + profile.username"
+                    *ngIf="profile.username!==current_username"
+                    (tap)="followClicked(profile.username, profile.following)">
+            </Button>
+            <Button *ngIf="profile.username===current_username"
+                    [nsRouterLink]="['/settings']" pageTransition="fade"
+                    class="btn btn-outline-secondary fas"
+                    text="&#xf013; Edit Profile Settings">
+            </Button>
+        </StackLayout>
+    </StackLayout>
+    <div class="container">
+        <div class="row">
+            <StackLayout class="col-xs-12 col-md-10 offset-md-1">
+                <StackLayout class="articles-toggle">
+                    <Tabs #profilePostTab
+                          selectedIndex="0"
+                          (selectedIndexChanged)="postTypeTabChange(profilePostTab.selectedIndex)"
+                          class="tab-primary">
+                        <TabStrip>
+                            <TabStripItem>
+                                <Label class="nav-link" text="My Posts"></Label>
+                            </TabStripItem>
+                            <TabStripItem>
+                                <Label class="nav-link" text="Favorited Posts"></Label>
+                            </TabStripItem>
+                        </TabStrip>
+
+                        <TabContentItem>
+                            <router-outlet></router-outlet>
+                        </TabContentItem>
+                        <TabContentItem>
+                            <router-outlet></router-outlet>
+                        </TabContentItem>
+                    </Tabs>
+                </StackLayout>
+            </StackLayout>
+        </div>
+    </div>
+</StackLayout>

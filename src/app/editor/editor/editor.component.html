@@ -1,0 +1,46 @@
+<ns-action-bar></ns-action-bar>
+<StackLayout class="editor-page">
+    <StackLayout orientation="horizontal" horizontalAlignment="center">
+        <Label text="New Article" class="section-title"></Label>
+    </StackLayout>
+    <StackLayout class="form-group">
+        <TextField hint="Article Title"
+                   name="title"
+                   class="form-control form-control-lg"
+                   [(ngModel)]="article.title">
+        </TextField>
+    </StackLayout>
+    <StackLayout class="form-group">
+        <TextField hint="What's this article about?"
+                   name="description"
+                   class="form-control"
+                   [(ngModel)]="article.description">
+        </TextField>
+    </StackLayout>
+    <StackLayout class="form-group">
+        <TextView hint="Write your article (in markdown)" rows="8"
+                  name="body"
+                  class="form-control"
+                  [(ngModel)]="article.body">
+        </TextView>
+    </StackLayout>
+    <StackLayout class="form-group">
+        <TextField hint="Enter tags"
+                   name="tags"
+                   class="form-control"
+                   (loaded)="tagFieldLoaded($event)">
+        </TextField>
+        <StackLayout orientation="horizontal" class="tag-list">
+            <ng-container *ngFor="let tag of article.tagList">
+                <Label [text]="'&#xf00d; ' + tag" textWrap="true"
+                       class="tag-default tag-pill fas"
+                       (tap)="removeTag(tag)">
+                </Label>
+            </ng-container>
+        </StackLayout>
+    </StackLayout>
+    <Button text="Publish Article"
+            class="btn btn-lg btn-primary"
+            (tap)="formSubmit()">
+    </Button>
+</StackLayout>

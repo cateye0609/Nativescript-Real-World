@@ -1,0 +1,23 @@
+<ns-action-bar></ns-action-bar>
+<!-- post type tab -->
+<Tabs #postTypeTab
+      selectedIndex="0"
+      (selectedIndexChanged)="postTypeTabChange(postTypeTab.selectedIndex)"
+      class="tab-primary">
+    <!-- The bottom tab UI is created via TabStrip (the containier) and TabStripItem (for each tab)-->
+    <TabStrip>
+        <TabStripItem>
+            <Label text="&#Xf0ac; Global Feed" class="fas"></Label>
+        </TabStripItem>
+        <TabStripItem *ngIf="is_logged_in">
+            <Label text="&#Xf007; Your Feed" class="fas"></Label>
+        </TabStripItem>
+    </TabStrip>
+    <!-- The number of TabContentItem components should corespond to the number of TabStripItem components -->
+    <TabContentItem>
+        <ns-articles-list [limit]=5 [options]="list_query_options"></ns-articles-list>
+    </TabContentItem>
+    <TabContentItem *ngIf="is_logged_in">
+        <ns-articles-list [limit]=5 [options]="list_query_options"></ns-articles-list>
+    </TabContentItem>
+</Tabs>

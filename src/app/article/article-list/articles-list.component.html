@@ -1,0 +1,64 @@
+<!-- loading -->
+<StackLayout class="loading" *ngIf="loading">
+    <ns-loading></ns-loading>
+</StackLayout>
+<!-- articles list -->
+<FlexboxLayout flexDirection="column" class="articles">
+    <PullToRefresh (refresh)="onRefesh($event)" indicatorFillColor="#ffffff" indicatorColor="#5CB85C">
+        <ScrollView>
+            <StackLayout class="posts-list">
+                <ng-container *ngFor="let post of articles">
+                    <FlexboxLayout class="post-item"
+                                   justifyContent="space-between" alignItems="center"
+                                   *ngIf="!loading">
+                        <StackLayout>
+                            <StackLayout orientation="horizontal" class="post-author">
+                                <Image [src]="post.author.image"
+                                       [nsRouterLink]="['/profile', post.author.username]"
+                                       pageTransition="fade">
+                                </Image>
+                                <StackLayout>
+                                    <Label [text]="post.author.username " textWrap="true"
+                                           class="text-green"
+                                           [nsRouterLink]="['/profile', post.author.username]"
+                                           pageTransition="fade">
+                                    </Label>
+                                    <Label [text]="post.createdAt | date:'MMMM dd, yyyy'" textWrap="true"
+                                           class="post-date">
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout [nsRouterLink]="['/article', post.slug]" pageTransition="fade">
+                                <Label [text]="post.title" textWrap="true" class="post-title"></Label>
+                                <Label [text]="post.description" textWrap="true"
+                                       maxLines="2"
+                                       class="post-summary text-grey">
+                                </Label>
+                            </StackLayout>
+                            <StackLayout orientation="horizontal" class="tag-list">
+                                <ng-container *ngFor="let tag of post.tagList">
+                                    <Label class="tag-pill tag-outline" [text]="tag"></Label>
+                                </ng-container>
+                            </StackLayout>
+                        </StackLayout>
+                        <Button [text]="'&#xf004; ' + post.favoritesCount"
+                                class="fas like-btn"
+                                [ngClass]="post.favorited ? 'liked':''"
+                                (tap)="favoriteClicked(post)">
+                        </Button>
+                    </FlexboxLayout>
+                </ng-container>
+                <!-- empty -->
+                <Label text="No articles are here... yet." textWrap=true
+                       class="app-article-preview"
+                       *ngIf="!loading && !articles.length">
+                </Label>
+                <!-- pagination -->
+                <ns-pagination *ngIf="!loading || total_pages > 1"
+                               [total_pages]="total_pages"
+                               (onChange)="changePage($event)">
+                </ns-pagination>
+            </StackLayout>
+        </ScrollView>
+    </PullToRefresh>
+</FlexboxLayout>

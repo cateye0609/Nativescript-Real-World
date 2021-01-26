@@ -1,0 +1,48 @@
+<ns-action-bar></ns-action-bar>
+<StackLayout>
+    <StackLayout orientation="horizontal" horizontalAlignment="center">
+        <Label text="Your Settings" class="section-title"></Label>
+    </StackLayout>
+    <StackLayout [formGroup]="setting_form">
+        <fieldset>
+            <StackLayout class="form-group">
+                <TextField hint="URL of profile picture"
+                           formControlName="image"
+                           class="form-control">
+                </TextField>
+            </StackLayout>
+            <StackLayout class="form-group">
+                <TextField hint="Username"
+                           formControlName="username"
+                           class="form-control">
+                </TextField>
+            </StackLayout>
+            <StackLayout class="form-group">
+                <TextView hint="Short bio about you"
+                          formControlName="bio"
+                          class="form-control">
+                </TextView>
+            </StackLayout>
+            <StackLayout class="form-group">
+                <TextField hint="Email"
+                           formControlName="email"
+                           class="form-control">
+                </TextField>
+            </StackLayout>
+            <StackLayout class="form-group">
+                <TextField hint="New Password"
+                           formControlName="password"
+                           class="form-control">
+                </TextField>
+            </StackLayout>
+            <button text="Update Settings"
+                    class="btn btn-primary"
+                    (tap)="settingSubmit()">
+            </button>
+        </fieldset>
+    </StackLayout>
+    <button class="btn btn-outline-danger -outline"
+            text="Or click here to logout. "
+            (tap)="logout()">
+    </button>
+</StackLayout>

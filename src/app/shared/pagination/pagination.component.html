@@ -1,0 +1,12 @@
+<StackLayout class="pagination-container" *ngIf="total_pages > 1">
+    <ScrollView orientation="horizontal">
+        <StackLayout orientation="horizontal" class="pagination">
+            <ng-container *ngFor="let item of [].constructor(total_pages); let currentIndex = index">
+                <Label [text]="currentIndex + 1" textWrap="true"
+                       class="page-item"
+                       [ngClass]="{active: currentIndex+1 == current_index}"
+                       (tap)="changePage(currentIndex+1)"></Label>
+            </ng-container>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>

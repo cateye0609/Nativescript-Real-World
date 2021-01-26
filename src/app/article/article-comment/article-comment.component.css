@@ -1,0 +1,24 @@
+.card {
+    border-width: 1 1 1 1;
+    border-color: #e5e5e5;
+    box-shadow: none !important;
+}
+
+.card .card-footer {
+    width: 100%;
+    border-top-width: 1;
+    border-top-color: #e5e5e5;
+    box-shadow: none !important;
+    font-weight: 300;
+}
+
+.comment-author-img {
+    vertical-align: middle;
+    height: 20;
+    width: 20;
+    border-radius: 50%;
+}
+
+.comments-options {
+    align-self: flex-end;
+}

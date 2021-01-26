@@ -1,0 +1,8 @@
+{
+    "search.exclude": {
+        "**/platforms": true
+    },
+    "files.exclude": {
+        "**/platforms": true
+    }
+}

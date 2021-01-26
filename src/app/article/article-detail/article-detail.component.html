@@ -1,0 +1,134 @@
+<ns-action-bar></ns-action-bar>
+<StackLayout class="article-page">
+    <StackLayout class="banner">
+        <Label [text]="article.title" textWrap="true" class="article-title"></Label>
+        <StackLayout class="article-meta" orientation="horizontal">
+            <FlexboxLayout alignItems="center">
+                <Image [src]="article.author?.image"
+                       [nsRouterLink]="['/profile', article.author?.username]" pageTransition="fade">
+                </Image>
+                <StackLayout class="info">
+                    <Label class="author"
+                           [text]="article.author?.username" textWrap=true
+                           [nsRouterLink]="['/profile', article.author?.username]" pageTransition="fade">
+                    </Label>
+                    <Label class="date"
+                           [text]="article.createdAt | date:'MMMM dd, yyyy'"
+                           textWrap=true>
+                    </Label>
+                </StackLayout>
+            </FlexboxLayout>
+            <FlexboxLayout flexDirection="row">
+                <StackLayout *ngIf="current_user?.username===article.author?.username"
+                             orientation="horizontal"
+                             class="btn-group">
+                    <Button text="&#xf044; Edit Article" textWrap="true"
+                            class="btn btn-sm btn-outline-secondary fas"
+                            [nsRouterLink]="['/editor', article.slug]" pageTransition="fade">
+                    </Button>
+                    <Button class="btn btn-sm btn-outline-danger fas"
+                            text="&#xf1f8; Delete Article"
+                            (tap)="deleteArticle(article.slug)">
+                    </Button>
+                </StackLayout>
+                <ng-container *ngIf="current_user?.username!==article.author?.username">
+                    <StackLayout class="btn-group" orientation="horizontal">
+                        <Button [text]="'&#xf067; ' + follow_text"
+                                class="btn btn-sm btn-outline-secondary fas"
+                                (tap)="followClicked(article.author.username, article.author.following)">
+                        </Button>
+                        <Button [ngClass]="article.favorited?'btn-primary':'btn-outline-primary'"
+                                class="btn btn-sm fas"
+                                [text]="'&#xf004; Favorite ' + article.favoritesCount"
+                                (tap)="favoriteClicked(article)">
+                        </Button>
+                    </StackLayout>
+                </ng-container>
+            </FlexboxLayout>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout class="page">
+        <StackLayout class="article-content">
+            <!-- <div *ngIf="article.body" [innerHTML]="article.body | markdown">
+                </div> -->
+            <HtmlView *ngIf="article.body" [html]="article.body"></HtmlView>
+            <StackLayout orientation="horizontal" class="tag-list m-t-10">
+                <ng-container *ngFor="let tag of article.tagList">
+                    <Label class="tag-pill tag-outline" [text]="tag"></Label>
+                </ng-container>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout class="hr"></StackLayout>
+        <FlexboxLayout flexDirection="row"
+                       justifyContent="center"
+                       class="article-meta">
+            <StackLayout orientation="horizontal">
+                <Image [src]="article.author?.image"
+                       [nsRouterLink]="['/profile', article.author?.username]" pageTransition="fade">
+                </Image>
+                <StackLayout class="info">
+                    <Label [text]="article.author?.username" textWrap="true"
+                           class="author"
+                           [nsRouterLink]="['/profile', article.author?.username]" pageTransition="fade">
+                    </Label>
+                    <Label class="date" [text]="article.createdAt | date:'MMMM dd, yyyy'"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout orientation="horizontal"
+                         class="btn-group"
+                         *ngIf="current_user?.username===article.author?.username">
+                <Button text="&#xf044; Edit Article" textWrap="true"
+                        class="btn btn-sm btn-outline-secondary fas"
+                        [nsRouterLink]="['/editor', article.slug]" pageTransition="fade">
+                </Button>
+                <Button text="&#xf1f8; Delete Article" textWrap="true"
+                        class="btn btn-sm btn-outline-danger fas"
+                        (tap)="deleteArticle(article.slug)">
+                </Button>
+            </StackLayout>
+            <ng-container *ngIf="current_user?.username!==article.author?.username">
+                <StackLayout class="btn-group" orientation="horizontal">
+                    <Button [text]="'&#xf067; ' + follow_text"
+                            class="btn btn-sm btn-outline-secondary fas"
+                            (tap)="followClicked(article.author.username, article.author.following)">
+                    </Button>
+                    <Button [ngClass]="article.favorited?'btn-primary':'btn-outline-primary'"
+                            class="btn btn-sm fas"
+                            [text]="'&#xf004; Favorite ' + article.favoritesCount"
+                            (tap)="favoriteClicked(article)">
+                    </Button>
+                </StackLayout>
+            </ng-container>
+        </FlexboxLayout>
+        <StackLayout>
+            <FlexboxLayout flexDirection="row" justifyContent="center" class="m-b-10">
+                <ng-container *ngIf="!is_logged_in">
+                    <Label nsRouterLink="/login" pageTransition="fade"
+                           text="Sign in" textWrap="true"
+                           class="text-green"></Label>
+                    <Label text=" or " textWrap="true"></Label>
+                    <Label nsRouterLink="/register" pageTransition="fade"
+                           text="Sign up" textWrap="true"
+                           class="text-green"></Label>
+                    <Label text=" to add comments on this article 😊" textWrap="true"></Label>
+                </ng-container>
+            </FlexboxLayout>
+            <FlexboxLayout flexDirection="column" class="card comment-form" *ngIf="is_logged_in">
+                <TextView name="comment"
+                          hint="Write a comment..."
+                          rows="3"
+                          [(ngModel)]="comment_body">
+                </TextView>
+                <FlexboxLayout flexDirection="row" class="card-footer" justifyContent="space-between">
+                    <img class="comment-author-img" [src]="current_user?.image">
+                    <Button text="Post Comment"
+                            class="btn btn-sm btn-primary"
+                            (tap)="addComment(article?.slug)">
+                    </Button>
+                </FlexboxLayout>
+            </FlexboxLayout>
+            <!-- comments -->
+            <ns-article-comment [slug]="article?.slug"></ns-article-comment>
+        </StackLayout>
+    </StackLayout>
+</StackLayout>

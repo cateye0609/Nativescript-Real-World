@@ -1,0 +1,19 @@
+<ns-action-bar></ns-action-bar>
+<StackLayout class="register" [formGroup]="register_form">
+    <Label text="Register" horizontalAlignment="center" class="auth-title"></Label>
+    <Label text="Have an account?" textWrap="true"
+           class="text-green"
+           horizontalAlignment="center"
+           [nsRouterLink]="['/login']"
+           pageTransition="fade"></Label>
+    <StackLayout class="form-group">
+        <TextField hint="Username" class="form-control" formControlName="username"></TextField>
+    </StackLayout>
+    <StackLayout class="form-group">
+        <TextField hint="Email" class="form-control" formControlName="email"></TextField>
+    </StackLayout>
+    <StackLayout class="form-group">
+        <TextField hint="Password" class="form-control" formControlName="password"></TextField>
+    </StackLayout>
+    <Button text="Register" class="btn btn-primary" (tap)="registerSubmit()"></Button>
+</StackLayout>

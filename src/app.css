@@ -1,0 +1,192 @@
+/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. You can learn more about the 
+NativeScript core theme at https://github.com/nativescript/theme
+The imported CSS rules must precede all other types of rules.
+*/
+
+@import "~@nativescript/theme/css/core.css";
+@import "~@nativescript/theme/css/default.css";
+/* Place any CSS rules you want to apply on both iOS and Android here.
+This is where the vast majority of your CSS code goes. */
+
+/*
+The following CSS rule changes the font size of all Buttons that have the
+"-primary" class modifier.
+*/
+
+Button.-primary {
+    font-size: 18;
+}
+
+/* font awesome */
+
+.far {
+    font-family: "Font Awesome 5 Free", "fa-regular-400";
+}
+
+.fab {
+    font-family: "Font Awesome 5 Brands", "fa-brands-400";
+}
+
+.fas {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+}
+
+/* card */
+
+.card {
+    margin-bottom: 7.5;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.125);
+}
+
+.card-block {
+    padding: 12.5;
+}
+
+.card-footer {
+    padding: 7.5 12.5;
+    background-color: #f5f5f5;
+}
+
+/* Buttons */
+
+.btn {
+    box-sizing: border-box;
+    box-shadow: none;
+}
+
+.btn-sm {
+    height: 20;
+    font-size: 9;
+    border-radius: 2;
+}
+
+.btn-primary {
+    background-color: #5CB85C;
+    color: #ffffff;
+}
+
+.btn-danger {
+    background-color: #FF647A;
+    color: #ffffff;
+}
+
+.btn-outline-danger {
+    /* outline-color: #FF647A!important; */
+    color: #FF647A;
+}
+
+.btn-outline-primary {
+    color: #5CB85C;
+    background-color: transparent;
+    border-color: #5CB85C;
+    border-width: 1 1 1 1;
+    android-elevation: 0;
+}
+
+.btn-outline-primary:pressed {
+    color: #ccc;
+    background-color: #5CB85C;
+}
+
+.btn-outline-secondary {
+    color: #ccc;
+    background-color: transparent;
+    border-color: #ccc;
+    border-width: 1 1 1 1;
+    android-elevation: 0;
+}
+
+.btn-outline-secondary:pressed {
+    color: #ffffff;
+    background-color: #ccc;
+}
+
+.btn-outline-danger {
+    color: #FF647A;
+    background-color: transparent;
+    border-color: #FF647A;
+    border-width: 1 1 1 1;
+    android-elevation: 0;
+}
+
+.btn-outline-danger:pressed {
+    color: #ffffff;
+    background-color: #FF647A;
+}
+
+/* tabs */
+
+.tab-primary TabStrip {
+    selected-item-color: #5CB85C;
+    un-selected-item-color: rgba(0, 0, 0, 0.3);
+    highlight-color: #5CB85C;
+}
+
+/* text */
+
+.section-title {
+    font-size: 25;
+    font-weight: bold;
+}
+
+.auth-title {
+    font-size: 20;
+}
+
+.text-green {
+    color: #5CB85C;
+}
+
+.text-red {
+    color: #FF647A;
+}
+
+.text-grey {
+    color: #999;
+}
+
+/* tags pill */
+
+.tag-default {
+    background-color: #818a91;
+    border-color: #818a91;
+    color: #ffffff;
+}
+
+.tag-pill {
+    padding: 2 5;
+    margin-right: 2;
+    font-size: 9;
+    border-radius: 30%;
+    border-width: 1 1 1 1;
+    border-color: #ddd;
+}
+
+.tag-outline {
+    color: #aaa;
+    background-color: transparent;
+}
+
+/* ****************** */
+
+.auth {
+    padding: 30 10;
+}
+
+.form-group TextField.form-control, .form-group TextView.form-control {
+    border-width: 1 1 1 1;
+    border-radius: 2;
+    border-color: rgba(0, 0, 0, 0.15);
+    placeholder-color: rgba(0, 0, 0, 0.3);
+    padding: 10;
+}

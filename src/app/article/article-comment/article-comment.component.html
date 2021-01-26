@@ -1,0 +1,37 @@
+<ScrollView>
+    <!-- ScrollView (or anything that's descendent of ContentView like Page) 
+    can have only one child element.  -->
+    <!-- https://stackoverflow.com/questions/59012473/nativescript-scrollview-not-scrolling -->
+    <FlexboxLayout flexDirection="column">
+        <ng-container *ngFor="let comment of comments">
+            <FlexboxLayout flexDirection="column" class="card">
+                <StackLayout class="card-block">
+                    <Label class="card-text"
+                           [text]="comment?.body">
+                    </Label>
+                </StackLayout>
+                <FlexboxLayout alignItems="center" justifyContent="space-between" class="card-footer">
+                    <StackLayout orientation="horizontal">
+                        <Image class="comment-author-img m-r-5"
+                               [src]="comment?.author?.image"
+                               [nsRouterLink]="['/profile', comment?.author.username]" pageTransition="fade">
+                        </Image>
+                        <Label class="comment-author text-green m-r-5"
+                               [nsRouterLink]="['/profile', comment?.author.username]" pageTransition="fade"
+                               [text]="comment?.author?.username" textWrap=true>
+                        </Label>
+                        <Label class="text-grey"
+                               [text]="comment?.createdAt | date:'MMMM dd, yyyy'"
+                               textWrap=true>
+                        </Label>
+                    </StackLayout>
+                    <Label *ngIf="current_user?.username===comment?.author?.username"
+                           class="comments-options fas"
+                           text="&#xf1f8;" textWrap=true
+                           (tap)="deleteComment(comment.id)">
+                    </Label>
+                </FlexboxLayout>
+            </FlexboxLayout>
+        </ng-container>
+    </FlexboxLayout>
+</ScrollView>
